@@ -1,0 +1,31 @@
+<div class="container">
+
+  <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+      <input #gb type="text" pInputText size="50" placeholder="Global Filter" class="ui-column-filter ui-inputtext ui-widget ui-state-default ui-corner-all ng-star-inserted">
+  </div>
+  
+  
+  <p-dataTable [value]="bots" [rows]="20" [paginator]="true" [globalFilter]="gb" [(selection)]="selectedBots" selectionMode="multiple" [metaKeySelection]="false" #dt exportFilename="qnalist" >
+      <p-header><img src="../assets/logo.png" width="120" height="44" position="center">
+          <div class="ui-helper-clearfix">
+              <button type="button" pButton icon="fa-file-o" iconPos="left" label="Download All Data" (click)="dt.exportCSV()" style="float:left"></button>
+              <button type="button" pButton icon="fa-file-o" iconPos="left" label="Download Selection Only" (click)="dt.exportCSV({selectionOnly:true})" style="float:right"></button>
+          </div>
+      </p-header>      
+      <p-column field="question" header="Question" [filter]="true" filterPlaceholder="Search" filterMatchMode="contains" [style]="{'word-wrap':'break-word'}"></p-column>
+      
+      <p-column field="answer" header="Answer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" [filter]="true" filterMatchMode="in" [style]="{'word-wrap':'break-word'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-multiSelect [options]="ifRight" defaultLabel="All" styleClass="ui-column-filter" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"></p-multiSelect>
+        </ng-template>
+      </p-column>
+      <p-column field="timestamp" header="Date" [filter]="true" filterMatchMode="Rangefilter" [sortable]="true" [style]="{'word-wrap':'break-word'}">
+        <ng-template pTemplate="filter" let-col>
+          <br>
+          <p-calendar [inputStyle]="{'width':'100%'}" [(ngModel)]="minDate"  placeholder="Set Min Date" showTime="true" hourFormat="12" styleClass="ui-column-filter" (onSelect)= "end($event.value, dt, col)" (onClose)= "end($event.value, dt, col)" ></p-calendar>
+          <p-calendar [inputStyle]="{'width':'100%'}" [(ngModel)]="maxDate" placeholder="Set Max Date" showTime="true" hourFormat="12" styleClass="ui-column-filter" (onSelect)= "end($event.value, dt, col)" (onClose)= "end($event.value, dt, col)" ></p-calendar>
+        </ng-template>
+      </p-column>
+  </p-dataTable>
+  </div>

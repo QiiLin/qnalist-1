@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+
+table thead th:nth-child(1) {
+    width: 15%;
+}
+
+table thead th:nth-child(3) {
+    width: 15%;
+}
