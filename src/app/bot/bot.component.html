@@ -12,7 +12,10 @@
               <button type="button" pButton icon="fa-file-o" iconPos="left" label="Download All Data" (click)="dt.exportCSV()" style="float:left"></button>
               <button type="button" pButton icon="fa-file-o" iconPos="left" label="Download Selection Only" (click)="dt.exportCSV({selectionOnly:true})" style="float:right"></button>
           </div>
-      </p-header>      
+      </p-header>
+      
+      <p-column field="usr_id" header="Username" [filter]="true" filterPlaceholder="Search" filterMatchMode="contains" [style]="{'word-wrap':'break-word'}"></p-column>
+
       <p-column field="question" header="Question" [filter]="true" filterPlaceholder="Search" filterMatchMode="contains" [style]="{'word-wrap':'break-word'}"></p-column>
       
       <p-column field="answer" header="Answer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" [filter]="true" filterMatchMode="in" [style]="{'word-wrap':'break-word'}">
